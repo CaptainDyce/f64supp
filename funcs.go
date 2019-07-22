@@ -76,7 +76,7 @@ func accept(v []float64, v1 []float64) {
 }
 
 func Apply(s []float64, f IndexedFunc) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		s[i] = f(i)
 	}
 	return s
@@ -101,7 +101,7 @@ func Ident(s []float64) []float64 {
 }
 
 func Setl(s []float64, value float64) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		s[i] = value
 	}
 	return s
@@ -109,14 +109,12 @@ func Setl(s []float64, value float64) []float64 {
 
 func Setv(s []float64, v []float64) []float64 {
 	accept(s, v)
-	for i, _ := range s {
-		s[i] = v[i]
-	}
+	copy(s, v)
 	return s
 }
 
 func SetMaskl(s []float64, value float64, p is.Predicate) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		if p(i) {
 			s[i] = value
 		}
@@ -126,7 +124,7 @@ func SetMaskl(s []float64, value float64, p is.Predicate) []float64 {
 
 func SetMaskv(s []float64, v []float64, p is.Predicate) []float64 {
 	accept(s, v)
-	for i, _ := range s {
+	for i := range s {
 		if p(i) {
 			s[i] = v[i]
 		}
@@ -140,7 +138,7 @@ func SetMaskv(s []float64, v []float64, p is.Predicate) []float64 {
 // -> s'[i] = s[i] + v[i]
 func Plusv(s []float64, v1 []float64) []float64 {
 	accept(s, v1)
-	for i, _ := range s {
+	for i := range s {
 		s[i] += v1[i]
 	}
 	return s
@@ -148,7 +146,7 @@ func Plusv(s []float64, v1 []float64) []float64 {
 
 // -> s'[i] = s[i] + value
 func Plusl(s []float64, value float64) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		s[i] += value
 	}
 	return s
@@ -156,7 +154,7 @@ func Plusl(s []float64, value float64) []float64 {
 
 // -> s'[i] = s[i] + o(i)
 func PlusOp(s []float64, o IndexedFunc) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		s[i] += o(i)
 	}
 	return s
@@ -176,7 +174,7 @@ func PlusOpi(s []float64, o IndexedOperator) []float64 {
 // -> s'[i] = s[i] - v[i]
 func Minusv(s []float64, v1 []float64) []float64 {
 	accept(s, v1)
-	for i, _ := range s {
+	for i := range s {
 		s[i] -= v1[i]
 	}
 	return s
@@ -184,7 +182,7 @@ func Minusv(s []float64, v1 []float64) []float64 {
 
 // -> s'[i] = s[i] - value
 func Minusl(s []float64, value float64) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		s[i] -= value
 	}
 	return s
@@ -192,7 +190,7 @@ func Minusl(s []float64, value float64) []float64 {
 
 // -> s'[i] = s[i] - o(i)
 func MinusOp(s []float64, o IndexedFunc) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		s[i] -= o(i)
 	}
 	return s
@@ -212,7 +210,7 @@ func MinusOpi(s []float64, o IndexedOperator) []float64 {
 // -> s'[i] = s[i] * v[i]
 func Timesv(s []float64, v1 []float64) []float64 {
 	accept(s, v1)
-	for i, _ := range s {
+	for i := range s {
 		s[i] *= v1[i]
 	}
 	return s
@@ -220,7 +218,7 @@ func Timesv(s []float64, v1 []float64) []float64 {
 
 // -> s'[i] = s[i] * value
 func Timesl(s []float64, value float64) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		s[i] *= value
 	}
 	return s
@@ -228,7 +226,7 @@ func Timesl(s []float64, value float64) []float64 {
 
 // -> s'[i] = s[i] * o(i)
 func TimesOp(s []float64, o IndexedFunc) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		s[i] *= o(i)
 	}
 	return s
@@ -248,7 +246,7 @@ func TimesOpi(s []float64, o IndexedOperator) []float64 {
 // -> s'[i] = s[i] / v[i]
 func Divv(s []float64, v1 []float64) []float64 {
 	accept(s, v1)
-	for i, _ := range s {
+	for i := range s {
 		s[i] /= v1[i]
 	}
 	return s
@@ -256,7 +254,7 @@ func Divv(s []float64, v1 []float64) []float64 {
 
 // -> s'[i] = s[i] / value
 func Divl(s []float64, value float64) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		s[i] /= value
 	}
 	return s
@@ -264,7 +262,7 @@ func Divl(s []float64, value float64) []float64 {
 
 // -> s'[i] = s[i] / o(i)
 func DivOp(s []float64, o IndexedFunc) []float64 {
-	for i, _ := range s {
+	for i := range s {
 		s[i] /= o(i)
 	}
 	return s
